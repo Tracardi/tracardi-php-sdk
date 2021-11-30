@@ -4,7 +4,6 @@
     "type": "library",
     "require": {
         "ext-json": "*",
-        "ext-http": "*",
         "symfony/serializer": "^4.4",
         "symfony/property-access": "^4.4",
         "php-http/httplug": "^2.2",

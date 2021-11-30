@@ -51,7 +51,7 @@ class ApiClient implements ApiClientInterface {
     ];
 
     if (!empty($body)) {
-      $body = json_encode($body);
+      $body = json_encode($body, JSON_THROW_ON_ERROR);
     }
 
     if ($this->provider) {

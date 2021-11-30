@@ -32,6 +32,7 @@ abstract class RepositoryBase {
    * @param array $context
    *
    * @return mixed
+   * @throws \Symfony\Component\Serializer\Exception\ExceptionInterface
    */
   protected function normalize($data, array $context = []) {
     return $this->serializer->normalize($data, 'json', $context);
@@ -53,7 +54,7 @@ abstract class RepositoryBase {
    * @param $data
    * @param $type
    *
-   * @return mixed
+   * @return array|object
    */
   protected function deserialize($data, $type) {
     return $this->serializer->deserialize($data, $type, 'json');
@@ -67,7 +68,7 @@ abstract class RepositoryBase {
   protected function handleRawRequest(RequestInterface $request): object {
     $response = $this->apiClient->handle($request);
     $responseBody = $response->getBody()->getContents();
-    return json_decode($responseBody);
+    return json_decode($responseBody, TRUE);
   }
 
 }
