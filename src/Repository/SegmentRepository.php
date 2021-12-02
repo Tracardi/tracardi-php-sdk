@@ -25,15 +25,14 @@ class SegmentRepository extends RepositoryBase {
   }
 
   /**
-   * @return array
-   * @throws \Exception
+   * @return \Tracardi\TracardiPhpSdk\Model\Segment\SegmentListView
    */
-  public function listSegments(): array {
+  public function listSegments(): SegmentListView {
     $request = new SegmentListRequest();
 
     return $this->handleRequest(
       $request,
-      SegmentListView::class . '[]'
+      SegmentListView::class
     );
   }
 
