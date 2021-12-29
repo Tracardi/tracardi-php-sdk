@@ -4,7 +4,8 @@
 
 ### 1. Create a Guzzle client
 https://github.com/guzzle/guzzle
-```
+
+```php
 use GuzzleHttp\Client;
 
 $baseUrl = 'https://<TRACARDI_API_URL>';
@@ -16,7 +17,8 @@ $client = new Client([
 
 ### 2. Create the OAuth2 provider & retrieve an access token
 https://github.com/thephpleague/oauth2-client
-```
+
+```php
 use League\OAuth2\Client\Provider\GenericProvider;
 
 $provider = new GenericProvider([
@@ -32,7 +34,8 @@ $accessToken = $provider->getAccessToken('password', [
 ```
 
 ### 3. Combine the above to get the Tracardi client
-```
+
+```php
 use Http\Adapter\Guzzle6\Client as ClientAdapter;
 use Tracardi\TracardiPhpSdk\Http\ApiClient\ApiClient;
 
@@ -41,7 +44,8 @@ $apiClient = ApiClient::withProvider($psrClient, $provider, $accessToken);
 ```
 
 ### 4. Start using the repositories
-```
+
+```php
 use Tracardi\TracardiPhpSdk\Tracardi;
 
 $profile = Tracardi::withDefaultSerializer($apiClient)
@@ -49,7 +53,7 @@ $profile = Tracardi::withDefaultSerializer($apiClient)
   ->getProfile('<ID>');
 ```
 
-## 5. Using your own HTTP client
+### 5. Using your own HTTP client
 
 It is not strictly required to use the League OAuth provider, alternatively you can
 instantiate the API client with an HTTP client only. It is your own responsibility that
