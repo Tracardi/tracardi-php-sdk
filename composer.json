@@ -9,11 +9,17 @@
         "php-http/httplug": "^2.2",
         "league/oauth2-client": "^2.6",
         "phpdocumentor/reflection-docblock": "^5.2",
-        "symfony/property-info": "^4.0"
+        "symfony/property-info": "^4.0",
+        "psr/http-client-implementation": "^1.0",
+        "php-http/message-factory": "^1.0",
+        "php-http/discovery": "^1.14"
     },
     "autoload": {
         "psr-4": {
             "Tracardi\\TracardiPhpSdk\\": "src/"
         }
+    },
+    "suggest": {
+        "nyholm/psr7": "When not using the League OAuth provider, this SDK requires a PSR-7 compliant request factory."
     }
 }

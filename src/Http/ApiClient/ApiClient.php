@@ -2,39 +2,58 @@
 
 namespace Tracardi\TracardiPhpSdk\Http\ApiClient;
 
+use Http\Discovery\Exception\DiscoveryFailedException;
+use Http\Discovery\Psr17FactoryDiscovery;
 use League\OAuth2\Client\Provider\AbstractProvider;
-use League\OAuth2\Client\Token\AccessToken;
-use Nyholm\Psr7\Request;
+use League\OAuth2\Client\Token\AccessTokenInterface;
 use Psr\Http\Client\ClientInterface;
+use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Tracardi\TracardiPhpSdk\Request\RequestInterface;
 
 class ApiClient implements ApiClientInterface {
 
-  /**
-   * @var AbstractProvider
-   */
-  protected AbstractProvider $provider;
+  private ClientInterface $httpClient;
 
-  /**
-   * @var ClientInterface
-   */
-  protected ClientInterface $httpClient;
+  private ?AbstractProvider $provider;
 
-  /**
-   * @var AccessToken
-   */
-  private AccessToken $accessToken;
+  private ?AccessTokenInterface $accessToken;
 
-  /**
-   * @param $provider
-   * @param \Psr\Http\Client\ClientInterface $httpClient
-   * @param $accessToken
-   */
-  public function __construct($provider, ClientInterface $httpClient, $accessToken) {
+  private ?RequestFactoryInterface $requestFactory;
+
+  public function __construct(
+    ClientInterface $httpClient,
+    ?AbstractProvider $provider = null,
+    ?AccessTokenInterface $accessToken = null,
+    ?RequestFactoryInterface $requestFactory = null
+  ) {
     $this->provider = $provider;
     $this->httpClient = $httpClient;
     $this->accessToken = $accessToken;
+    $this->requestFactory = $requestFactory;
+  }
+
+  /**
+   * Instantiate the API client with a League OAuth provider. The provider
+   * will be used to perform requests.
+   */
+  public static function withProvider(
+    ClientInterface $httpClient,
+    AbstractProvider $provider,
+    AccessTokenInterface $accessToken
+  ): ApiClient {
+    return new static($httpClient, $provider, $accessToken);
+  }
+
+  /**
+   * Instantiate the API client with an HTTP client only. It is your own
+   * responsibility that the HTTP client performs authenticated requests.
+   */
+  public static function withClient(
+    ClientInterface $httpClient,
+    ?RequestFactoryInterface $requestFactory = null
+  ): ApiClient {
+    return new static($httpClient, null, null, $requestFactory);
   }
 
   /**
@@ -68,18 +87,22 @@ class ApiClient implements ApiClientInterface {
         $this->accessToken,
         $options
       );
+
       return $this->httpClient->sendRequest($psrRequest);
     }
 
     // If no provider was given. execute the request directly.
-    $psrRequest = new Request(
+    $psrRequest = $this->getRequestFactory()->createRequest(
       $request->getMethod(),
       $request->getEndpoint(),
       $headers,
-      $body
+      !empty($body) ? $body : ''
     );
+
     return $this->httpClient->sendRequest($psrRequest);
   }
 
-
+  private function getRequestFactory(): RequestFactoryInterface {
+    return $this->requestFactory ?: Psr17FactoryDiscovery::findRequestFactory();
+  }
 }
