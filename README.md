@@ -3,6 +3,7 @@
 ## Getting started
 
 ### 1. Create a Guzzle client
+
 https://github.com/guzzle/guzzle
 
 ```php
@@ -16,16 +17,13 @@ $client = new Client([
 ```
 
 ### 2. Create the OAuth2 provider & retrieve an access token
+
 https://github.com/thephpleague/oauth2-client
 
 ```php
-use League\OAuth2\Client\Provider\GenericProvider;
+use Tracardi\TracardiPhpSdk\OAuth2\Provider\TracardiProvider;
 
-$provider = new GenericProvider([
-  'urlAuthorize' => $baseUrl . '/authorize',
-  'urlAccessToken' => $baseUrl . '/token',
-  'urlResourceOwnerDetails' => $baseUrl. '/resource',
-]);
+$provider = new TracardiProvider(['baseUrl' => $baseUrl]);
 
 $accessToken = $provider->getAccessToken('password', [
   'username' => '<USERNAME>',
