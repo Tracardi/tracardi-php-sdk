@@ -2,109 +2,142 @@
 
 namespace Tracardi\TracardiPhpSdk\Model\Profile;
 
-class Profile {
+class Profile
+{
 
   private string $id;
 
-  private ?string $mergedWith;
+  private array $ids;
 
   private Metadata $metadata;
-
-  private Operation $operation;
 
   private Stats $stats;
 
   private Traits $traits;
 
-  private Pii $pii;
-
   private array $segments;
 
-  private array $consents;
+  private ?Interests $interests;
+
+  private Consents $consents;
 
   private bool $active;
 
-  public function __construct(string $id, ?string $mergedWith, Metadata $metadata, Operation $operation, Stats $stats, Traits $traits, Pii $pii, array $segments, array $consents, bool $active) {
+  private Aux $aux;
+
+  private Data $data;
+
+  private ?Meta $meta;
+
+  public function __construct(string $id, array $ids, Metadata $metadata, Stats $stats, Traits $traits, array $segments, ?Interests $interests, Consents $consents, bool $active, Aux $aux, Data $data, ?Meta $meta)
+  {
     $this->id = $id;
-    $this->mergedWith = $mergedWith;
+    $this->ids = $ids;
     $this->metadata = $metadata;
-    $this->operation = $operation;
     $this->stats = $stats;
     $this->traits = $traits;
-    $this->pii = $pii;
     $this->segments = $segments;
+    $this->interests = $interests;
     $this->consents = $consents;
     $this->active = $active;
+    $this->aux = $aux;
+    $this->data = $data;
+    $this->meta = $meta;
   }
 
   /**
    * @return string
    */
-  public function getId(): string {
+  public function getId(): string
+  {
     return $this->id;
   }
 
   /**
-   * @return string|null
+   * @return array
    */
-  public function getMergedWith(): ?string {
-    return $this->mergedWith;
+  public function getIds(): array
+  {
+    return $this->ids;
   }
 
   /**
    * @return \Tracardi\TracardiPhpSdk\Model\Profile\Metadata
    */
-  public function getMetadata(): Metadata {
+  public function getMetadata(): Metadata
+  {
     return $this->metadata;
-  }
-
-  /**
-   * @return \Tracardi\TracardiPhpSdk\Model\Profile\Operation
-   */
-  public function getOperation(): Operation {
-    return $this->operation;
   }
 
   /**
    * @return \Tracardi\TracardiPhpSdk\Model\Profile\Stats
    */
-  public function getStats(): Stats {
+  public function getStats(): Stats
+  {
     return $this->stats;
   }
 
   /**
    * @return \Tracardi\TracardiPhpSdk\Model\Profile\Traits
    */
-  public function getTraits(): Traits {
+  public function getTraits(): Traits
+  {
     return $this->traits;
   }
 
   /**
-   * @return \Tracardi\TracardiPhpSdk\Model\Profile\Pii
-   */
-  public function getPii(): Pii {
-    return $this->pii;
-  }
-
-  /**
    * @return array
    */
-  public function getSegments(): array {
+  public function getSegments(): array
+  {
     return $this->segments;
   }
 
   /**
-   * @return array
+   * @return \Tracardi\TracardiPhpSdk\Model\Profile\Interests
    */
-  public function getConsents(): array {
+  public function getInterests(): ?Interests
+  {
+    return $this->interests;
+  }
+
+  /**
+   * @return \Tracardi\TracardiPhpSdk\Model\Profile\Consents
+   */
+  public function getConsents(): Consents
+  {
     return $this->consents;
   }
 
   /**
    * @return bool
    */
-  public function isActive(): bool {
+  public function isActive(): bool
+  {
     return $this->active;
   }
 
+  /**
+   * @return \Tracardi\TracardiPhpSdk\Model\Profile\Aux
+   */
+  public function getAux(): Aux
+  {
+    return $this->aux;
+  }
+
+  /**
+   * @return \Tracardi\TracardiPhpSdk\Model\Profile\Data
+   */
+  public function getData(): Data
+  {
+    return $this->data;
+  }
+
+  /**
+   * @return \Tracardi\TracardiPhpSdk\Model\Profile\Meta
+   */
+  public function getMeta(): ?Meta
+  {
+    return $this->meta;
+  }
 }

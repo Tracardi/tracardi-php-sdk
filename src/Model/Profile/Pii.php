@@ -4,97 +4,118 @@ namespace Tracardi\TracardiPhpSdk\Model\Profile;
 
 class Pii {
 
-  private ?string $name;
+  private ?string $firstname;
 
-  private ?string $surname;
+  private ?string $lastname;
 
-  private ?string $birthDate;
+  private ?string $display_name;
 
-  private ?string $email;
+  private ?string $birthday;
 
-  private ?string $telephone;
+  private Language $language;
 
-  private ?string $twitter;
+  private ?string $gender;
 
-  private ?string $facebook;
+  private Education $education;
 
-  private ?string $whatsapp;
+  private Civil $civil;
 
-  private array $other;
+  private Attributes $attributes;
 
-  public function __construct(?string $name, ?string $surname, ?string $birthDate, ?string $email, ?string $telephone, ?string $twitter, ?string $facebook, ?string $whatsapp, array $other) {
-    $this->name = $name;
-    $this->surname = $surname;
-    $this->birthDate = $birthDate;
-    $this->email = $email;
-    $this->telephone = $telephone;
-    $this->twitter = $twitter;
-    $this->facebook = $facebook;
-    $this->whatsapp = $whatsapp;
-    $this->other = $other;
+  /**
+   * Pii constructor.
+   * @param string|null $firstname
+   * @param string|null $lastname
+   * @param string|null $display_name
+   * @param string|null $birthday
+   * @param Language $language
+   * @param string|null $gender
+   * @param Education $education
+   * @param Civil $civil
+   * @param Attributes $attributes
+   */
+  public function __construct(
+    ?string $firstname,
+    ?string $lastname,
+    ?string $display_name,
+    ?string $birthday,
+    Language $language,
+    ?string $gender,
+    Education $education,
+    Civil $civil,
+    Attributes $attributes
+  ) {
+    $this->firstname = $firstname;
+    $this->lastname = $lastname;
+    $this->display_name = $display_name;
+    $this->birthday = $birthday;
+    $this->language = $language;
+    $this->gender = $gender;
+    $this->education = $education;
+    $this->civil = $civil;
+    $this->attributes = $attributes;
   }
 
   /**
    * @return string|null
    */
-  public function getName(): ?string {
-    return $this->name;
+  public function getFirstname(): ?string {
+    return $this->firstname;
   }
 
   /**
    * @return string|null
    */
-  public function getSurname(): ?string {
-    return $this->surname;
+  public function getLastname(): ?string {
+    return $this->lastname;
   }
 
   /**
    * @return string|null
    */
-  public function getBirthDate(): ?string {
-    return $this->birthDate;
+  public function getDisplayName(): ?string {
+    return $this->display_name;
   }
 
   /**
    * @return string|null
    */
-  public function getEmail(): ?string {
-    return $this->email;
+  public function getBirthday(): ?string {
+    return $this->birthday;
+  }
+
+  /**
+   * @return \Tracardi\TracardiPhpSdk\Model\Profile\Language
+   */
+  public function getLanguage(): Language {
+    return $this->language;
   }
 
   /**
    * @return string|null
    */
-  public function getTelephone(): ?string {
-    return $this->telephone;
+  public function getGender(): ?string {
+    return $this->gender;
   }
 
   /**
-   * @return string|null
+   * @return \Tracardi\TracardiPhpSdk\Model\Profile\Education
    */
-  public function getTwitter(): ?string {
-    return $this->twitter;
+  public function getEducation(): Education {
+    return $this->education;
   }
 
   /**
-   * @return string|null
+   * @return \Tracardi\TracardiPhpSdk\Model\Profile\Civil
    */
-  public function getFacebook(): ?string {
-    return $this->facebook;
+  public function getCivil(): Civil {
+    return $this->civil;
   }
 
   /**
-   * @return string|null
+   * @return \Tracardi\TracardiPhpSdk\Model\Profile\Attributes
    */
-  public function getWhatsapp(): ?string {
-    return $this->whatsapp;
+  public function getAttributes(): Attributes {
+    return $this->attributes;
   }
-
-  /**
-   * @return array
-   */
-  public function getOther(): array {
-    return $this->other;
-  }
-
 }

@@ -6,11 +6,17 @@ class Metadata {
 
   private Time $time;
 
-  private ?string $ip;
+  private ?Aux $aux;
 
-  public function __construct(Time $time, ?string $ip) {
+  private ?bool $status;
+
+  private System $system;
+
+  public function __construct(Time $time, ?Aux $aux, ?bool $status, System $system) {
     $this->time = $time;
-    $this->ip = $ip;
+    $this->aux = $aux;
+    $this->status = $status;
+    $this->system = $system;
   }
 
   /**
@@ -21,10 +27,23 @@ class Metadata {
   }
 
   /**
-   * @return string|null
+   * @return \Tracardi\TracardiPhpSdk\Model\Profile\Aux|null
    */
-  public function getIp(): ?string {
-    return $this->ip;
+  public function getAux(): ?Aux {
+    return $this->aux;
   }
 
+  /**
+   * @return bool
+   */
+  public function getStatus(): ?bool {
+    return $this->status;
+  }
+
+  /**
+   * @return \Tracardi\TracardiPhpSdk\Model\Profile\System
+   */
+  public function getSystem(): System {
+    return $this->system;
+  }
 }

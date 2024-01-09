@@ -4,26 +4,17 @@ namespace Tracardi\TracardiPhpSdk\Model\Profile;
 
 class Traits {
 
-  private array $private;
+  private ?PublicTrait $public;
 
-  private array $public;
-
-  public function __construct(array $private, array $public) {
-    $this->private = $private;
+  public function __construct(?PublicTrait $public) {
     $this->public = $public;
   }
 
   /**
-   * @return array
+   * @return \Tracardi\TracardiPhpSdk\Model\Profile\PublicTrait
    */
-  public function getPrivate(): array {
-    return $this->private;
-  }
-
-  /**
-   * @return array
-   */
-  public function getPublic(): array {
+  public function getVisit(): ?PublicTrait
+  {
     return $this->public;
   }
 

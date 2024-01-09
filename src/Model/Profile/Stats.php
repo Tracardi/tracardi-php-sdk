@@ -8,9 +8,9 @@ class Stats {
 
   private int $views;
 
-  private array $counters;
+  private ?array $counters;
 
-  public function __construct(int $visits, int $views, array $counters) {
+  public function __construct(int $visits, int $views, ?array $counters) {
     $this->visits = $visits;
     $this->views = $views;
     $this->counters = $counters;
@@ -33,8 +33,7 @@ class Stats {
   /**
    * @return array
    */
-  public function getCounters(): array {
+  public function getCounters(): ?array {
     return $this->counters;
   }
-
 }
