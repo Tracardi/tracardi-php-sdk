@@ -4,7 +4,7 @@ namespace Tracardi\TracardiPhpSdk\Model\Profile;
 
 class Visit
 {
-  private string $last;
+  private ?string $last;
 
   private string $current;
 
@@ -12,7 +12,7 @@ class Visit
 
   private string $tz;
 
-  public function __construct(string $last, string $current, int $count, string $tz)
+  public function __construct(?string $last, string $current, int $count, string $tz)
   {
     $this->last = $last;
     $this->current = $current;
